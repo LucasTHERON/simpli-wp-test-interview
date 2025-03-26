@@ -32,4 +32,4 @@ Autoloader::register();
 *
 */
 
-
+include_once plugin_dir_path( __FILE__ ).'/lucas/lucas.php';
