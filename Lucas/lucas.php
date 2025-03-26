@@ -38,9 +38,17 @@ function check_if_lucas_already_created_a_form_page(){
     $query = new WP_Query($args);
           
     if(!$query->have_posts()){
+
+        ob_start();
+
+        include_once plugin_dir_path( __FILE__ ).'form.php';
+
+        $file_content = ob_get_clean();
+
+
         $post = array(
             'post_title'    => 'Ajouter un post (par Lucas)',
-            'post_content'  => 'Hello content',
+            'post_content'  => $file_content,
             'post_status'   => 'publish',
             'post_type'     => 'page',
         );
