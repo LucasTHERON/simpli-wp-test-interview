@@ -26,3 +26,32 @@ add_action('admin_menu', 'lucas_menu');
 function lucas_view(){
     include_once plugin_dir_path( __FILE__ ).'view.php';
 }
+
+function check_if_lucas_already_created_a_form_page(){
+    // On créé la page prévue pour le form si elle n'existe pas
+
+    $args = array(
+        'post_type' => 'page',
+        'name' => 'Ajouter un post (par Lucas)',
+    );
+          
+    $query = new WP_Query($args);
+          
+    if(!$query->have_posts()){
+        $post = array(
+            'post_title'    => 'Ajouter un post (par Lucas)',
+            'post_content'  => 'Hello content',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+        );
+        
+        wp_insert_post($post);
+    }
+}
+
+add_action('init', 'check_if_lucas_already_created_a_form_page');
+
+/*
+* Pour gagner du temps, on cherche la page avec ce nom car je sais qu'il n'existera pas sur le Wordpress test
+* En production, on stockera l'ID de la page à sa création, 
+*/
