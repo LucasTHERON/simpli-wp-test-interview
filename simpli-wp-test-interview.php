@@ -32,4 +32,17 @@ Autoloader::register();
 *
 */
 
-include_once plugin_dir_path( __FILE__ ).'/lucas/lucas.php';
+include_once plugin_dir_path( __FILE__ ).'/Lucas/lucas.php';
+
+
+function add_lucas_form_page() {
+    include_once plugin_dir_path( __FILE__ ).'/Lucas/activation.php';
+}
+
+function remove_lucas_form_page() {
+    include_once plugin_dir_path( __FILE__ ).'/Lucas/deactivation.php';
+}
+
+
+register_activation_hook(__FILE__, 'add_lucas_form_page' );
+register_deactivation_hook(__FILE__, 'remove_lucas_form_page' );
