@@ -6,7 +6,7 @@
 *
 */
 
-/* Insertion du cpt */
+/* Insertion du cpt: */
 include_once plugin_dir_path( __FILE__ ).'cpt.php';
 
 /* Création et insertion de la page backend */

@@ -1,6 +1,6 @@
 <?php
 
-//Mon Custom Post Type
+// Mon Custom Post Type
 function lucas_register_post() {
     $labels = array(
         'name' => 'Post',
@@ -40,3 +40,42 @@ function lucas_register_post() {
     register_post_type('lucas_post' , $args );
 }
 add_action('init', 'lucas_register_post');
+
+
+
+
+// Partie pour mymeta
+function add_lucas_post_metabox() {
+    add_meta_box(
+        'mymeta',
+        'Metadonnées :',
+        'lucas_post_render_mymeta',
+        'lucas_post'
+    );
+}
+add_action( 'add_meta_boxes', 'add_lucas_post_metabox', 10, 1 );
+
+function lucas_post_render_mymeta() {
+    $id = get_the_id();
+    $value = get_post_meta($id, 'mymeta', true);
+    wp_nonce_field( 'lulu_nonce_action', 'lulu_nonce_field' );
+    ?>
+
+    <label for="mymeta">My meta</label>
+    <input type="text" name="mymeta" id="mymeta" value="<?php echo esc_attr( $value ); ?>" />
+
+    <?php
+}
+
+function lucas_post_save_mymeta( $id, $post ) {
+    // Vérification des données et autorisations
+    if(!isset($_POST['lulu_nonce_field'])) {return;}
+    if(!wp_verify_nonce($_POST['lulu_nonce_field'], 'lulu_nonce_action')) {return;}
+    if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {return;}
+    if(!current_user_can('edit_post', $id)) {return;}
+    if(!isset($_POST['mymeta'])) {return;}
+
+    $mymeta = sanitize_text_field( $_POST['mymeta'] );
+    update_post_meta( $id, 'mymeta', $mymeta );
+}
+add_action( 'save_post', 'lucas_post_save_mymeta', 10, 2 );
