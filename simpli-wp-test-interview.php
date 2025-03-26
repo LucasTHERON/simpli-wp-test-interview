@@ -26,6 +26,10 @@ class SimpliCeremonyStreamingPlugin extends Singleton
 Autoloader::register();
 \SimpliCeremonyStreamingPlugin\SimpliCeremonyStreamingPlugin::GetInstance();
 
-
+/*
+*
+* Mon code ira dans le dossier "Lucas"
+*
+*/
 
 
