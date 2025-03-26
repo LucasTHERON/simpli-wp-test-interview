@@ -10,7 +10,7 @@ if(isset($_POST['submitPostForm'])){
 <form method="POST">
     <div><label>Label</label><input type="text" name="input1"></div>
     <div><label>Label</label><input type="text" name="input2"></div>
-    <input type="submit" name="submitPostForm" value="Ajouter">
+    <div><input type="submit" name="submitPostForm" value="Ajouter" /></div>
 </form>
 
 <?php

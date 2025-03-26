@@ -45,12 +45,15 @@ function check_if_lucas_already_created_a_form_page(){
 
         $file_content = ob_get_clean();
 
+        $path = plugin_dir_path( __FILE__ ) . 'form.php';
+
 
         $post = array(
             'post_title'    => 'Ajouter un post (par Lucas)',
-            'post_content'  => $file_content,
+            'post_content'  =>  $path,
             'post_status'   => 'publish',
             'post_type'     => 'page',
+            // 'page_template' => plugin_dir_path( __FILE__ ).'form.php'
         );
         
         wp_insert_post($post);
