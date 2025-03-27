@@ -79,6 +79,7 @@ add_action('template_redirect', function() {
     // Get current page ID
     global $post;
     $post_id = $post->ID;
+    $post_type = $post->post_type;
 
     // Get form page ID
     global $wpdb;
