@@ -21,7 +21,8 @@ if(isset($_POST['submitPostForm'])){
             'post_status'   => 'publish',
             'post_type'     => 'lucas_post',
             'meta_input'     => [
-                'mymeta' => $meta
+                'mymeta' => $meta,
+                'from_user' => true 
             ]
         );
         

@@ -89,4 +89,10 @@ add_action('template_redirect', function() {
             return plugin_dir_path( __FILE__ ).'form.php';
         });
     }
+
+    if($post_type == 'lucas_post'){
+        add_filter('template_include', function() {
+            return plugin_dir_path( __FILE__ ).'cpt-template.php';
+        });
+    }
 });
