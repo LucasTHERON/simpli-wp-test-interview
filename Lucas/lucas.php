@@ -50,10 +50,10 @@ function check_if_lucas_already_created_a_form_page(){
 
         $post = array(
             'post_title'    => 'Ajouter un post (par Lucas)',
-            'post_content'  =>  $path,
+            // 'post_content'  => 'C:/wamp64/www/Lucas THERON – Cas pratiques/cas-pratique-2/wp-content/plugins/simpli-wp-test-interview/Lucas/lucas.php',
             'post_status'   => 'publish',
             'post_type'     => 'page',
-            // 'page_template' => plugin_dir_path( __FILE__ ).'form.php'
+            'page_template' => 'form.php'
         );
         
         wp_insert_post($post);
