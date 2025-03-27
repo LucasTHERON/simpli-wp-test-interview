@@ -1,22 +1,40 @@
 <?php
 
+$message = '';
 
 if(isset($_POST['submitPostForm'])){
-    var_dump($_POST);
-          
+    if(!isset($_POST['title']) || !isset($_POST['meta'])){
+        $message = '<p style="color: red">Veuillez ajouter un titre et une méta</p>';
+    }else{
+        $title = htmlspecialchars($_POST['title']);
+        $meta = htmlspecialchars($_POST['meta']);
+        if(!isset($_POST['meta'])){
+            $content = 'Hello world !';
+        }else{
+            $content = htmlspecialchars($_POST['content']);            
+        }
 
-    // On ajoute une page vide
-    $post = array(
-        'post_title'    => 'test',
-        'post_content'    => 'test',
-        'post_status'   => 'publish',
-        'post_type'     => 'lucas_post',
-        'meta_input'     => [
-            'mymeta' => 'hello test'
-        ]
-    );
-    
-    $form_id = wp_insert_post($post);
+        // Création du post avec les données récupérées
+        $post = array(
+            'post_title'    => $title,
+            'post_content'    => $content,
+            'post_status'   => 'publish',
+            'post_type'     => 'lucas_post',
+            'meta_input'     => [
+                'mymeta' => $meta
+            ]
+        );
+        
+        $insert_post = wp_insert_post($post);
+
+        if($insert_post == 0){
+            $message = '<p style="color: red">Il y a eu une erreur, merci d\'essayer plus tard</p>';
+        }else{
+            $message = '<p style="color: green">Votre post a bien été ajouté</p>';
+        }
+    }
+
+
 
 }
 
@@ -36,12 +54,13 @@ if(isset($_POST['submitPostForm'])){
   <div id="content mycontent">
     <form method="post">
         <h2>Ajouter un custom post</h2>
-        <div><label>Post name : </label><br><input type="text" name="input1"></div>
-        <div><label>Meta : </label><br><input type="text" name="input2"></div>
-        <div><label>Post content : </label><br><textarea rows='8' name="a"></textarea></div>
+        <div><label>Post name* : </label><br><input type="text" required name="title"></div>
+        <div><label>Meta* : </label><br><input type="text" required name="meta"></div>
+        <div><label>Post content : </label><br><textarea rows='8' name="content"></textarea></div>
         <div><input type="submit" name="submitPostForm" value="Ajouter" /></div>
     </form>
   </div>
+  <?= $message ?? $message ?>
 </body>
 <style>
     body{
@@ -76,6 +95,8 @@ if(isset($_POST['submitPostForm'])){
         border-radius: 8px;
         box-shadow: none;
         margin-bottom: 20px;
+        border-width: 1px;
+        border-color: #272727;
         width: 100%;
     }
 
