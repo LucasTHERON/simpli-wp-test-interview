@@ -1,0 +1,1 @@
+(()=>{console.log("Hello World! (from block-lucas-block-lucas block)");const e=document.querySelector("#reverse-text"),t=document.querySelector(".content");e.addEventListener("click",(function(){let e=t.textContent.split("").reverse().join("");t.textContent=e}))})();

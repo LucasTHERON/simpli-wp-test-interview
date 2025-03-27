@@ -4,7 +4,6 @@ $id = $post->ID;
 $mymeta = get_post_meta($id, 'mymeta', true);
 $colorbg = get_post_meta($id, 'colorbg', true);
 $colorborder = get_post_meta($id, 'colorborder', true);
-var_dump($colorbg);
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +20,8 @@ var_dump($colorbg);
         <p class="meta">mymeta: <?= $mymeta ?></p>
         <p class="content"><?= $post->post_content ?></p>
     </div>
-    Pour inverser le texte, faites un double click
+    <strong>Pour inverser le texte, faites un double click sur le contenu</strong>
+    <br><br><br>
 <?php get_footer() ?>
 </html>
 
@@ -29,7 +29,7 @@ var_dump($colorbg);
 .post_content{
     background: <?= $colorbg ?>;
     border: 2px solid <?= $colorborder ?>;
-    width: 320px;
+    width: 450px;
     max-width: 95%;
     padding: 30px;
     border-radius: 15px;

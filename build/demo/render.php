@@ -4,6 +4,5 @@
  */
 ?>
 <p <?php echo get_block_wrapper_attributes(); ?>>
-	<p style="display:inline-block" class="content"><?php esc_html_e( 'Hello World !', 'block-lucas' ); ?></p>
-	<button id="reverse-text">Inverser le texte</button>
+	<?php esc_html_e( 'Smp Demo – hello from a dynamic block!', 'demo' ); ?>
 </p>

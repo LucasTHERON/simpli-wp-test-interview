@@ -22,4 +22,16 @@
  
 /* eslint-disable no-console */
 console.log("Hello World! (from block-lucas-block-lucas block)");
+
+const reverseBtn = document.querySelector("#reverse-text");
+const content = document.querySelector(".content");
+
+function reverseContent(){
+    let text = content.textContent;
+    let newText = text.split("").reverse().join("");
+    content.textContent = newText;
+}
+
+reverseBtn.addEventListener("click", reverseContent);
+
 /* eslint-enable no-console */

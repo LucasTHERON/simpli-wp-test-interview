@@ -20,6 +20,7 @@ class SimpliCeremonyStreamingPlugin extends Singleton
         include_once plugin_dir_path( __FILE__ ).'/CeremonyStreaming.php';
         new CeremonyStreamingPlugin();
         register_block_type(plugin_dir_path( __FILE__ ) . '/build/demo');
+        register_block_type(plugin_dir_path( __FILE__ ) . '/build/block-lucas');
     }
 
 }
@@ -32,4 +33,4 @@ Autoloader::register();
 *
 */
 
-include_once plugin_dir_path( __FILE__ ).'/lucas/lucas.php';
+include_once plugin_dir_path( __FILE__ ).'/Lucas/lucas.php';

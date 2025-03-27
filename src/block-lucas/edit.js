@@ -32,7 +32,9 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'Block Lucas – hello from the editor!', 'block-lucas' ) }
+			{ __( 'Hello World !', 'block-lucas' ) }
+			<input id="custom-text" />
 		</p>
+		
 	);
 }
