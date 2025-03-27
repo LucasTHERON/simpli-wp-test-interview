@@ -1,4 +1,6 @@
 <?php
+
+get_header();
 var_dump($_POST);
 if(isset($_POST['submitPostForm'])){
     var_dump($_POST);

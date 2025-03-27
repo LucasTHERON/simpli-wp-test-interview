@@ -39,30 +39,54 @@ function check_if_lucas_already_created_a_form_page(){
           
     if(!$query->have_posts()){
 
-        ob_start();
-
-        include_once plugin_dir_path( __FILE__ ).'form.php';
-
-        $file_content = ob_get_clean();
-
-        $path = plugin_dir_path( __FILE__ ) . 'form.php';
-
-
+        // On ajoute une page vide
         $post = array(
             'post_title'    => 'Ajouter un post (par Lucas)',
-            // 'post_content'  => 'C:/wamp64/www/Lucas THERON – Cas pratiques/cas-pratique-2/wp-content/plugins/simpli-wp-test-interview/Lucas/lucas.php',
             'post_status'   => 'publish',
             'post_type'     => 'page',
-            'page_template' => 'form.php'
         );
         
-        wp_insert_post($post);
+        $form_id = wp_insert_post($post);
+
+        // On stocke l'ID de la page qu'on a créée
+        global $wpdb;
+        $variableCheck = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'lucas_form_post_id';");
+        if($variableCheck == null){
+            $wpdb->insert(
+                'wp_options',
+                array(
+                    'option_name' => 'lucas_form_post_id',
+                    'option_value' => $form_id,
+                )
+            );
+        }else{
+            $wpdb->update(
+                'wp_options',
+                array(
+                    'option_value' => $form_id,
+                ),
+                array(
+                    'option_name' => 'lucas_form_post_id',
+                )
+            );
+        }
     }
 }
 
 add_action('init', 'check_if_lucas_already_created_a_form_page');
 
-/*
-* Pour gagner du temps, on cherche la page avec ce nom car je sais qu'il n'existera pas sur le Wordpress test
-* En production, on stockera l'ID de la page à sa création, 
-*/
+add_action('template_redirect', function() {
+    // Get current page ID
+    global $post;
+    $post_id = $post->ID;
+
+    // Get form page ID
+    global $wpdb;
+    $form_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'lucas_form_post_id';");
+
+    if ( $form_id == $post_id ) {
+        add_filter('template_include', function() {
+            return plugin_dir_path( __FILE__ ).'form.php';
+        });
+    }
+});
