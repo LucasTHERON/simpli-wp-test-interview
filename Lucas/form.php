@@ -1,10 +1,24 @@
 <?php
 
-var_dump($_POST);
+
 if(isset($_POST['submitPostForm'])){
     var_dump($_POST);
+          
+
+    // On ajoute une page vide
+    $post = array(
+        'post_title'    => 'test',
+        'post_content'    => 'test',
+        'post_status'   => 'publish',
+        'post_type'     => 'lucas_post',
+        'meta_input'     => [
+            'mymeta' => 'hello test'
+        ]
+    );
+    
+    $form_id = wp_insert_post($post);
+
 }
-echo date('h:i:s');
 
 ?>
 
